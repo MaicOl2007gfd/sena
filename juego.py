@@ -69,7 +69,7 @@ for nivel in range(1, 11):
     cambio_activado = False  
 
     comodines_usados_en_esta_pregunta = []
-#Inicia el juego
+    #Inicia el juego
     while True:
         print(f"\nLa pregunta es: {pregunta_actual['pregunta']}")
         for opcion in pregunta_actual['opciones']:
@@ -82,12 +82,13 @@ for nivel in range(1, 11):
                 print("\nComodines disponibles:")
                 for clave in comodines_disponibles:
                     print(f"{clave}) {comodines[clave]['nombre']}")
-                eleccion = input("¿Quieres usar un comodín? (Escribe número o'no'): ").lower()
-
-                if eleccion in comodines_disponibles:
-                    comodines[eleccion]["usado"] = True
-                    comodines_usados_en_esta_pregunta.append(eleccion)
-                    print(f"\nHas utilizado el comodín: {comodines[eleccion]['nombre']}")
+                eleccion = input("¿Quieres usar un comodín? (Escribe número o (no) ): ").lower()
+                #se mira si el jugador quiere usar un comodin
+                if eleccion in comodines_disponibles or eleccion == "no":
+                    if eleccion in comodines_disponibles:
+                        comodines[eleccion]["usado"] = True
+                        comodines_usados_en_esta_pregunta.append(eleccion)
+                        print(f"\nHas utilizado el comodín: {comodines[eleccion]['nombre']}")
                     #comodin del 50/50  
                     if eleccion == "1":
                         opciones = pregunta_actual['opciones']
@@ -122,29 +123,29 @@ for nivel in range(1, 11):
                 break
 
             #se mira las respuestas del jugador si sale o responde bien
-            respuesta = input(f"\n🤔Ingresa la letra de tu respuesta (Escribe 'comodin' para utilizar otro comodín o escribe 'salir'): ").lower()
-        #Se mira si el jugador sale
-        if respuesta == 'salir':
-            print(f"\n👌Has decidido salir del juego. Tu premio es: ${dinero}")
-            exit()
-            #se mira si la respuesta es correcta
-        elif respuesta == pregunta_actual['respuesta']:
-            print(f"\n✅ RESPUESTA CORRECTA")
-            dinero += 10000
-            dinero *= 2
-            print(f"💰 Dinero ganado: ${dinero}")
-            break  
-        #El jugador pierde cada vez que responde mal 
-        else:
-            print("❌ RESPUESTA INCORRECTA")
-            print("Has perdido el juego.")
-            print(f"💸 Te llevas: ${dinero}")
-            exit()
+            respuesta = input(f"\n🤔Ingresa la letra de tu 'respuesta' (Escribe 'comodin' para utilizar otro comodín o escribe 'salir'): ").lower()
+            if respuesta == "salir":
+                print(f"\nTU DINERO GANADO FUE ${dinero}, GRACIAS POR JUGAR.")
+                exit()
+            if respuesta == pregunta_actual['respuesta']:
+                print(f"\n✅ RESPUESTA CORRECTA")
+                dinero += 10000
+                dinero *= 2
+                print(f"💰 Dinero ganado: ${dinero}")
+                break  
+            #El jugador pierde cada vez que responde mal 
+            else:
+                print("❌ RESPUESTA INCORRECTA")
+                print("Has perdido el juego.")
+                print(f"💸 Te llevas: ${dinero}")
+                exit()
 
+          #se mira si el jugador se quiere retirar y no perder su plataaaaaaa
 
-            #se mira si el jugador se quiere retirar y no perder su plataaaaaaa
-
-    retirar = input(f"\n¿Deseas retirarte del juego? (si/no): ").lower()
-    if retirar == "si":
-        print(f"\nTU DINERO GANADO FUE ${dinero}, GRACIAS POR JUGAR.")
-        break
+            retirar = input(f"\n¿Deseas retirarte del juego? (si/no): ").lower()
+            if retirar == "si":
+                    print(f"\nTU DINERO GANADO FUE ${dinero}, GRACIAS POR JUGAR.")
+                    exit()
+        # Si se respondió bien, salimos del while True para pasar a la siguiente pregunta
+        if respuesta == pregunta_actual['respuesta']:
+            break
