@@ -132,15 +132,17 @@ for nivel in range(1, 11):
                 dinero += 10000
                 dinero *= 2
                 print(f"💰 Dinero ganado: ${dinero}")
-                break  
-            #El jugador pierde cada vez que responde mal 
+                break
+            if respuesta == "comodin":
+                print(f"\n🔎Tus comodines son: {comodines_disponibles}")
+                continue
             else:
                 print("❌ RESPUESTA INCORRECTA")
                 print("Has perdido el juego.")
                 print(f"💸 Te llevas: ${dinero}")
                 exit()
 
-          #se mira si el jugador se quiere retirar y no perder su plataaaaaaa
+            #se mira si el jugador se quiere retirar y no perder su plataaaaaaa
 
             retirar = input(f"\n¿Deseas retirarte del juego? (si/no): ").lower()
             if retirar == "si":
